@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>과제3</title>
+    <style>
+      body {
+        padding: 30px;
+      }
+      div {
+        padding: 20px;
+        border: 1px solid #999999;
+        background-color: white;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <div>
+        <div>
+          <div>
+            <div>
+              <div>
+                <div>
+                  <div>
+                    <div>
+                      <div>
+                        <div>
+                          <div>
+                            <div>
+                              <div>
+                                <div>
+                                  <div>
+                                    <div>
+                                      <div>
+                                        <div>
+                                          <div></div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    // 각각의 div를 클릭하면, 클릭한 div와 바로 상위 div의 색깔이 각각, 파랑 / 빨강으로 바뀌게 해주세요
+    let boxes = document.querySelectorAll('div')
+
+    boxes.forEach(function(box){
+        box.addEventListener('click', function(){
+            box.style.backgroundColor = 'blue'
+            this.parentElement.style.backgroundColor ='red'
+            event.stopPropagation()
+        });
+    });
+
+    // boxes.addEventListener('click', function(){
+    //     boxes.style.backgroundColor = 'blue'
+    //     this.parentElement.style.backgroundColor ='red'
+    //     })
+  </script>
+</html>

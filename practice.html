@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel='stylesheet' href='practice.css'>
+    <title>Document</title>
+</head>
+<body>
+    <h1 class='event'>여기가 바뀔거에요</h1>
+    <h1 id='result'> _____________ </h1>
+    <input type='text' id='input'>
+    <!-- <h2 class='ha'>이건가</h2>
+    <h3 class='ha'>요건가</h3>
+    <h4 class='ha'>저건가?</h4> -->
+    <!-- <a href='https://www.naver.com'>네이버로 가기</a>
+    <img src='https://picsum.photos/200/300'/> -->
+    <!-- <div class='box'>박스</div> -->
+    <script>
+        // let title = document.querySelector('#title')
+        // title.classList.add('title_style');
+
+        // let h1 = document.querySelector('h1')
+        // h1.innerHTML = '운장이 형은 <i>바보</i>다'
+        // h1.textContent = '운장이는 몽총이다'
+        
+        // //href 랑 네이버 링크랑 이미지 바꾸기
+        // let link = document.querySelector('a')
+        // let image = document.querySelector('img')
+        // console.log(link.getAttribute('href'))
+        // console.log(image.getAttribute('src'))
+        // //using setAttribute to change values
+        // link.setAttribute('href', 'https://google.com')
+        // image.setAttribute('src', 'https://picsum.photos/400/600')
+
+        // //마우스 위치 반응...근데 이렇게 짜면 안됨
+        // //function 위치에 매번 새로운 function 안넣고 밖에 function선언하고 넣어줘도 됨
+        // let box = document.querySelector('.box')
+        // //마우스 올렸을때
+        // box.addEventListener('mouseover', function() {
+        //     box.style.backgroundColor = 'blue'
+        // })
+        // //마우스 내렸을때
+        // box.addEventListener('mouseout', function() {
+        //     box.style.backgroundColor = 'yellow'
+        // })
+
+
+        // //버튼 눌러서 택스트 바뀌게 하기
+        // let h1 = document.querySelector('h1')
+        // let button = document.querySelectorAll('button')        
+        // for (let a = 0; a <3; a++) {
+        //     button[a].addEventListener('click', function() {
+        //         // h1.innerHTML = "운장이는 <i>뚱이가</i> 아니야!"
+        //         button[a].innerHTML = '찾았다!'; })
+        // }
+        //또 다른 방법
+        // let buttons = document.querySelectorAll('button');
+
+        // buttons.forEach(function(button) {
+        //     button.addEventListener('click', function() {
+        //         // button.innerHTML = '찾았다!'; button==this
+        //         this.innerHTML = '찾았다!'
+        //     });
+        // });
+        //실습
+        // let indicators = document.querySelectorAll('.ha'); //forEach에는 querySelector만 적용가능
+        // indicators.forEach(function(indicator){
+        //     indicator.addEventListener('click', function(){
+        //         this.innerHTML = '찾았다!'
+        //     });
+        // });
+        
+        // //키보드 누르면 다른 텍스트 뜨게 하기
+        // let result = document.querySelector('#result')
+        // let input = document.querySelector('#input')
+        // input.addEventListener('keydown', keydown)
+        // function keydown(event){ 
+        //     if (event.which === 13) {
+        //         result.innerHTML = 'Enter를 눌렀네요'
+        //     } else if (event.which === 17) {
+        //         result.innerHTML = 'Ctrl키를 눌렀네요!'
+        //     } else if (event.which === 18) {
+        //         result.innerHTML = 'Alt키를 눌렀네요!'
+        //     } else if (event.which === 16) {
+        //         result.innerHTML = 'Shift키를 눌렀네요!'
+        //     } else {
+        //         result.innerHTML = '이상한걸 눌렀네요'
+        //     };
+        //     console.log(event)
+        //     };
+
+        let result = document.querySelector('#result')
+        let input = document.querySelector('#input')
+
+        input.addEventListener('keyup', keyup)
+
+        function keyup(event){ 
+            console.log(input.value)
+            result.textContent = input.value //innerHTML에 html요소가 들어가면 출력이 안돼서 textContent
+        }
+    </script>
+</body>
+</html>

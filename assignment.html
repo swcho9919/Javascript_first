@@ -15,7 +15,7 @@
 
     <script>
         let title = document.querySelector("#title")
-        //title.style.color = getRandomNumber(randomColor)
+        
 
         let body = document.querySelector('body')
 
@@ -29,14 +29,7 @@
             (title.style.color === getRandomNumber4) ? getRandomNumber4 : getRandomNumber4
         }, 500)
 
-        // function getRandomNumber2(){
-        //     var randomColor2 = 'rgb(' + (Math.floor(Math.random() * 256) ) + ',' + (Math.floor(Math.random() * 256) ) + ',' + (Math.floor(Math.random() * 256) ) + ')';
-        //     console.log(randomColor2);
-            
-        //     title.style.color = randomColor2;
     
-        // }
-        
         function getRandomNumber(){
             var randomColor = 'rgb(' + (Math.floor(Math.random() * 256) ) + ',' + (Math.floor(Math.random() * 256) ) + ',' + (Math.floor(Math.random() * 256) ) + ')';
             console.log(randomColor);
@@ -44,9 +37,6 @@
         
             body.style.backgroundColor = randomColor;
         }
-
-        // getRandomNumber();
-        // getRandomNumber2();
 
         function getRandomNumber4(){
             var randomColor4 = 'rgb(' + (Math.floor(Math.random() * 256) ) + ',' + (Math.floor(Math.random() * 256) ) + ',' + (Math.floor(Math.random() * 256) ) + ')';

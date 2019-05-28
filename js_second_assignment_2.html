@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>과제2</title>
+    <style>
+      .outside {
+        border: 4px solid black;
+        padding: 50px;
+        margin: 100px;
+      }
+      .center {
+        border: 3px solid black;
+        padding: 50px;
+      }
+      .inside {
+        border: 2px solid black;
+        height: 100px;
+        text-align: center;
+        line-height: 100px;
+        font-size: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="outside">
+      <div class="center">
+        <div class="inside">
+          <a href="https://www.google.com" target="_blank">구글로 가기!</a>
+        </div>
+      </div>
+    </div>
+    <script>
+      let outside = document.querySelector(".outside");
+      let center = document.querySelector(".center");
+      let inside = document.querySelector(".inside");
+      let link = document.querySelector("a");
+
+      outside.addEventListener("click", function() {
+        console.log("가장 바깥 쪽!");
+      });
+      center.addEventListener("click", function() {
+        console.log("가운데!");
+        event.stopPropagation();
+      });
+      inside.addEventListener("click", function() {
+        console.log("가장 안 쪽!");
+        event.stopPropagation();
+      });
+      link.addEventListener("click", function() {
+        console.log("구글로 가기!");
+        event.stopPropagation();
+      });
+    </script>
+  </body>
+</html>

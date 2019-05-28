@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1 class='event'>여기가 바뀔거에요</h1>
+    <h1 id='result'> _____________ </h1>
+    <input type='text' id='input' >
+    <script>
+        let result = document.querySelector('#result')
+        let input = document.querySelector('#input')
+
+        input.addEventListener('keydown', keydown)
+
+        
+        function keydown(event){ 
+            console.log(input.value)
+            if (event.which === 13){
+            result.textContent = input.value //innerHTML에 html요소가 들어가면 출력이 안돼서 textContent
+            input.value = null;
+            }
+        }
+    </script>
+</body>
+</html>
