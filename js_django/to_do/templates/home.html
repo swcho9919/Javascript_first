@@ -1,0 +1,149 @@
+{% load staticfiles %}
+<head>
+    <script
+      src="http://code.jquery.com/jquery-3.3.1.js"
+      integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+      integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type = 'text/css' href="{% static 'home.css' %}" />
+  </head>
+  
+  <body>
+    <div class="container">
+      <div class="title">
+        오늘의 할 일
+        <span>
+          <i id="plus" class="fas fa-plus"></i>
+          <i id="delete_all" class="far fa-trash-alt icon"></i>
+        </span>
+      </div>
+      <form id ="new_form" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type=submit id="input" />
+      </form>
+  
+      <div class="list">
+        <div>
+          - 멋쟁이사자처럼 교안 짜기
+          <span>
+            <i class="far fa-trash-alt icon"></i>
+          </span>
+        </div>
+        <div>
+          - 기억심리학 과제하기
+          <span>
+            <i class="far fa-trash-alt icon"></i>
+          </span>
+        </div>
+        {% for post in posts %}
+          <div>
+            - {{post.content}}
+            <span>
+              <i class="far fa-trash-alt icon"></i>
+            </span>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <!-- <script src="static/scripts/home.js"></script>  -->
+    <script>
+
+       // using jQuery
+      function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+          var cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+            }
+          }
+        }
+        return cookieValue;
+      }
+      function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+      }
+      $(document).ready(function() {
+        var csrftoken = getCookie('csrftoken');
+        $.ajaxSetup({
+          beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+              xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+          }
+        });
+      });
+      
+      let button = $('#plus')
+      let input = $('#input')
+      
+      // + 버튼 클릭 시, input fade 토글
+      button.click( function() {
+        input.fadeToggle(function(){
+
+        });
+      });
+      // trash icon 클릭 시, 500ms 간 fadeOut 후 사라짐
+      $(document).on("click", '.list i.far', function(){
+        
+        $.ajax({
+          type: "DELETE",
+          url: "{% url 'delete' %}",
+          data: {postpk : post_primary_key},
+          // beforeSend: function(xhr) {
+            //   xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"));
+            // },
+            success: function(response){
+              $(this).closest('div').fadeOut(500);
+            }
+        })
+      });
+    
+
+      // 작성된 리스트 누르면 .complete라는 클래스 토글
+      $(document).on("click", '.list div', function(){
+        $(this).toggleClass('list complete')
+      });
+
+      // 입력 후 엔터 입력 시, 새로운 리스트 생성
+      $('form').keydown(function() {
+        if (event.which === 13){
+          $('.list').append("<div> - " + $(this).val() + "<span><i class='far fa-trash-alt icon'></i></span></div>");
+          // $('.list').append("<div> - " + "{{post.content}}" + "<span><i class='far fa-trash-alt icon'></i></span></div>");
+          $("form").submit(function(e){
+            e.preventDefault();
+            let serializedData = $(this).serialize();
+            $.ajax({
+              type : 'POST',
+              url : "{% url 'post_submit' %}",
+              dataType : "json",
+              data : serializedData,
+              success : function(response){
+                $('#new_form')[0].reset();
+              }
+            });
+          });
+          // $(this).val('');
+        }
+      });
+
+      // 상단의 trash 버튼 클릭 시, 완료된 리스트 모두 삭제
+      $(document).on("click", '#delete_all', function(){
+        $('.list .complete').remove()
+      });
+      
+    </script>
+  </body>
+  

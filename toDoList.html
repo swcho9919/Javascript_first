@@ -1,0 +1,80 @@
+<head>
+    <script
+      src="http://code.jquery.com/jquery-3.3.1.js"
+      integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+      integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="toDoList.css" />
+  </head>
+  
+  <body>
+    <div class="container">
+      <div class="title">
+        오늘의 할 일
+        <span>
+          <i id="plus" class="fas fa-plus"></i>
+          <i id="delete_all" class="far fa-trash-alt icon"></i>
+        </span>
+      </div>
+      <input type="text" id="input" />
+  
+      <div class="list">
+        <div>
+          - 멋쟁이사자처럼 교안 짜기
+          <span>
+            <i class="far fa-trash-alt icon"></i>
+          </span>
+        </div>
+        <div>
+          - 기억심리학 과제하기
+          <span>
+            <i class="far fa-trash-alt icon"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+  
+    <script>
+      // + 버튼 클릭 시, input fade 토글
+      let button = $('#plus')
+      let input = $('#input')
+      
+      button.click( function() {
+        input.fadeToggle(function(){
+
+        });
+      });
+      // trash icon 클릭 시, 500ms 간 fadeOut 후 사라짐
+      $(document).on("click", '.list i.far', function(){
+        console.log($(this))
+        $(this).closest('div').fadeOut(500);
+      });
+    
+
+      // 작성된 리스트 누르면 .complete라는 클래스 토글
+      $(document).on("click", '.list div', function(){
+        $(this).toggleClass('list complete')
+      });
+
+      // 입력 후 엔터 입력 시, 새로운 리스트 생성
+      $('input').keydown(function() {
+        if (event.which === 13){
+          $('.list').append("<div> - " + $(this).val() + "<span><i class='far fa-trash-alt icon'></i></span></div>")
+          $(this).val('');
+        }
+      });
+
+      // 상단의 trash 버튼 클릭 시, 완료된 리스트 모두 삭제
+      $(document).on("click", '#delete_all', function(){
+        $('.list .complete').remove()
+      });
+      
+    </script>
+  </body>
+  
